@@ -113,6 +113,7 @@ angular.module('me-lazyload', [])
 
             $scope.$on('$destroy', function(){
                 iElement.unbind('load');
+                elements = {}
             });
         }
     };
