@@ -92,6 +92,13 @@ angular.module('me-lazyload', [])
         link: function($scope, iElement){
 
             iElement.bind('load', onLoad);
+            
+            iElement.bind('error', function() {
+                var uid = getUid(iElement);
+                if (elements.hasOwnProperty(uid)) {
+                    delete elements[uid];
+                }
+            });
 
             $scope.$watch('lazySrc', function(){
                 if(isVisible(iElement)){
@@ -113,6 +120,7 @@ angular.module('me-lazyload', [])
 
             $scope.$on('$destroy', function(){
                 iElement.unbind('load');
+                elements = {}
             });
         }
     };
